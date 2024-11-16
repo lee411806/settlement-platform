@@ -21,7 +21,6 @@
 > - PW: 1212  
 
 
----
 
 <br>
 
@@ -94,11 +93,65 @@
 [Git-url]: https://git-scm.com/
 [GitHub-url]: https://github.com/
 
-각 스택의 버전 채워 넣어야 함
+
 
 <br>
 
-### 📌 주요 기능 --> (코드랑 더 상세하게 설명해야하나요?)
+### ⚙️ 개발 환경
+
+
+- **Java**: 17
+- **MySQL**: 8.0
+- **Gradle**: 8.10.2
+- **Spring Boot**: 3.3.5
+
+- **IDE**: IntelliJ IDEA 2024.1.4 (Ultimate Edition)
+- **OS**: Windows 11
+- **MySQL Workbench**: 8.0 CE
+- **Docker**: 27.2.0
+- **Apache JMeter**: 5.6
+
+<br>
+
+### 🔧 사전 요구사항
+
+1. 필수 소프트웨어
+   - **Java**: 17 이상
+   - **Gradle**: 8.10.2
+   - **MySQL**: 8.0 이상
+   - **Docker**: 27.2.0
+   - **Docker Compose**: 2.20.2 (선택)
+   - **MySQL Workbench**: 8.0 CE (선택)
+
+2. 환경 변수 설정
+   - `DATABASE_URL`: `jdbc:mysql://localhost:3306/mydb`
+   - `JWT_SECRET`: `your-secret-key`
+   - `SPRING_PROFILES_ACTIVE`: `dev`
+   - `REDIS_HOST`: `localhost` (선택)
+
+3. 네트워크 요구사항
+   - MySQL 기본 포트: `3306`
+   - Spring Boot 기본 포트: `8080`
+   - Docker 컨테이너 포트 매핑: `127.0.0.1:8080->8080`
+
+4. 권장 환경
+   - 운영 체제: Windows 11 / Ubuntu 22.04
+   - 최소 메모리: 8GB
+   - CPU: 4코어 이상
+   - 디스크 여유 공간: 100GB 이상
+
+5. 데이터베이스 설정
+   - 스키마 파일: `/db/schema.sql`
+   - 초기 데이터 파일: `/db/data.sql`
+
+6. 테스트 환경
+   - Apache JMeter: 부하 테스트 설정 파일 (`/test/jmeter-config.jmx`)
+   - Postman: Postman 컬렉션 파일 제공 (`/docs/postman-collection.json`)
+
+
+<br>
+
+## 📌 주요 기능 --> (코드랑 더 상세하게 설명해야하나요?)
 
 
 1. **회원 서비스**  
@@ -110,7 +163,7 @@
         - JWT 토큰을 활용한 로그인 기능 구현  
         - 로그아웃 기능 제공  
 
----
+
 
 2. **스트리밍 서비스** 
     - **동영상 재생**  
@@ -122,21 +175,21 @@
         - 각 동영상에는 1개 이상의 광고 영상이 등록
         - 광고 영상이 등록된 시점까지 영상이 재생되면 광고 시청 횟수가 카운트(5분 단위)
        
----
+
 
 3. **어뷰징 방지** 
     - 동영상 게시자가 동영상을 시청한 경우 조회수 및 광고 시청 횟수에 카운트되지 않음  
     - 30초 이내 동일한 Source(IP, 인증키)로부터의 접속은 어뷰징으로 간주하여 조회수 및 시청 횟수에 카운트되지 않음 
 
 
----
+
 
 4. **통계 데이터 조회 및 생성 기능** 
     - 1일, 1주일, 1달 동안 조회수가 높은 동영상 TOP 5  
     - 1일, 1주일, 1달 동안 재생 시간이 긴 동영상 TOP 5  
     - **Spring Batch**를 활용하여 적재된 데이터를 기반으로 통계 데이터를 생성  
 
----
+
 
 5. **정산 데이터 생성 기능** 
     - 동영상별 정산 금액 = 업로드 영상 정산 금액 + 광고 영상 정산 금액  
@@ -145,7 +198,7 @@
         - 광고 영상 정산 금액 = 광고별 단가 × 광고 조회 수  
     - 광고는 영상 길이에 따라 5분당 1개씩 자동 등록  
 
----
+
 
 6. **정산 데이터 조회 기능** 
     - 1일, 1주일, 1달 동안 총 정산 금액 조회  
@@ -154,7 +207,7 @@
 
 <br>
 
-### 🔥 성능 최적화
+## 🔥 성능 최적화
 - **인덱스(Index) 적용**  
   - 주요 컬럼에 인덱스를 추가하여 조회 성능을 최적화.  
 
@@ -194,12 +247,15 @@
 
 <br>
 
-### 🏗 아키텍쳐
+
+
+
+## 🏗 아키텍쳐
 ![image](https://github.com/user-attachments/assets/b6f8c531-9f69-4083-8d1d-b26b59112463)
 
 <br>
 
-### 🗂 폴더구조
+## 🗂 폴더구조
 ```
 ┣ 📁streaming-service
      ┣ 📁batch
@@ -227,3 +283,27 @@
 ┣ 📁settlement-service
 ```
 
+<br>
+
+## :bookmark: API 문서
+🔗 [Postman API Documentation](https://documenter.getpostman.com/view/30989395/2sAYBPktii)
+
+<br>
+
+
+## 🛠️ 지원 창구
+
+### 연락 방법
+- 이메일: jaeyonglee06@gmail.com
+- GitHub Issues: https://github.com/lee411806/settlement-platform/issues
+
+### 문제 보고
+- 🐞 버그 신고: [버그 신고 템플릿 바로가기](https://github.com/lee411806/settlement-platform/issues/new?assignees=&labels=&projects=&template=%F0%9F%90%9E-%EB%B2%84%EA%B7%B8-%EC%8B%A0%EA%B3%A0.md&title=%22%5BBUG%5D+%3C%EB%B2%84%EA%B7%B8+%EC%9A%94%EC%95%BD%3E%22)
+
+### 문서 및 가이드
+- 공식 문서: 설치 가이드, api 사용법 넣을 예정
+- FAQ: 자주 발생한 에러 넣을 예정
+
+### 지원 정책
+- 지원 시간: 평일 오전 9시 ~ 오후 6시 (KST)
+- 긴급 문의: jaeyonglee06@gmail.com으로 연락해주세요.
